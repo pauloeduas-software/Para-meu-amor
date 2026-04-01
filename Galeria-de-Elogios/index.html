@@ -3,18 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✨ Galeria de Elogios ✨</title>
-  <link rel="stylesheet" href="style.css">
+  <title>✧ Galeria de Afeto ✧</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=ultra3">
 </head>
 <body id="page-body">
 
-  <div class="wrap">
-    <div class="card">
-      <h1 id="compliment-text">Você é um raio de sol!</h1>
-      <p id="click-prompt">Clique para continuar a galeria</p>
-    </div>
+  <div class="mesh-container">
+    <div class="mesh-gradient"></div>
+    <div class="stars-overlay"></div>
   </div>
 
-  <script src="script.js"></script>
+  <nav class="top-nav glass">
+    <a href="../index.html" class="back-link">
+      <span class="back-icon">←</span> Voltar
+    </a>
+  </nav>
+
+  <main class="content-viewport">
+    <div class="compliment-stage">
+      <div class="typography-reveal">
+        <h1 id="compliment-text">Você é fofa.</h1>
+        <div class="decor-line"></div>
+        <p id="click-prompt">Dê um toque na tela</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bottom-bar glass">
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=ultra3"></script>
 </body>
 </html>

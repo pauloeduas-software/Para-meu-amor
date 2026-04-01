@@ -32,39 +32,53 @@ window.onload = function() {
     "Você tem um jeito especial.",
     "Eu confio em você.",
     "Gosto do nosso jeito romantico e safado."
-
   ];
 
   let currentIndex = 0;
-
   const complimentText = document.getElementById('compliment-text');
-  const clickPrompt = document.getElementById('click-prompt');
-  
-  complimentText.textContent = compliments[0];
+  const progressBar = document.getElementById('progressBar');
 
-  function showNextCompliment() {
+  function updateDisplay() {
+    const text = compliments[currentIndex];
     
-    currentIndex++;
-    if (currentIndex >= compliments.length) {
-      currentIndex = 0; 
-    }
-    
-    const nextCompliment = compliments[currentIndex];
-
+    // Smooth fade/slide out
     complimentText.style.opacity = '0';
-    complimentText.style.transform = 'translateY(10px)';
-
+    complimentText.style.transform = 'translateY(15px)';
+    
     setTimeout(() => {
-      complimentText.textContent = nextCompliment;
+      complimentText.textContent = text;
+      
+      // Reveal
       complimentText.style.opacity = '1';
       complimentText.style.transform = 'translateY(0)';
       
-      if (currentIndex > 0) {
-        clickPrompt.style.display = 'none';
-      }
-    }, 300); 
+      // Progress
+      updateProgress();
+    }, 300);
+  }
+  
+  function updateProgress() {
+      const progress = ((currentIndex + 1) / compliments.length) * 100;
+      if (progressBar) progressBar.style.width = `${progress}%`;
   }
 
-  document.onclick = showNextCompliment;
+  // Initial setup ONLY for progress (text is already in HTML)
+  updateProgress();
 
+  // Interaction
+  document.body.onclick = function(e) {
+    // Ignore if clicked on back button
+    if (e.target.closest('.back-link')) return;
+    
+    currentIndex = (currentIndex + 1) % compliments.length;
+    updateDisplay();
+  };
+
+  // Keyboard
+  document.onkeydown = function(e) {
+    if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
+      currentIndex = (currentIndex + 1) % compliments.length;
+      updateDisplay();
+    }
+  };
 };

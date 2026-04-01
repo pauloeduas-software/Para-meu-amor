@@ -3,41 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💕 O Portal do Afeto 💕</title>
-  <link rel="stylesheet" href="style.css?v=5"> 
+  <title>✧ O Portal do Afeto ✧</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=elite"> 
 </head>
-<body class="bg1">
-
-  <div class="wrap">
-    <div class="card">
-      <h1>Escolha Seus Presentes</h1>
-      <p>Clique em um dos portais abaixo:</p>
-
-      <div class="button-container">
-        
-        <a href="Encontro/index.html" class="portal-btn violet-btn">
-          🗺️ Jornada do Encontro
-          <span>(Mapa Interativo)</span>
-        </a>
-
-        <a href="Coracoes/index.html" class="portal-btn pink-btn">
-          💖 Tela de Corações
-          <span>(Clique para Fazer Chover Amor)</span>
-        </a>
-
-        <a href="Galeria-de-Elogios/index.html" class="portal-btn violet-btn">
-          ✨ Galeria de Elogios
-          <span>(Frases de Carinho)</span>
-        </a>
-
-        <a href="Mil-te-amos/index.html" class="portal-btn pink-btn">
-          ❤️ 1000 Te Amos
-          <span>(Amor em Mil Idiomas)</span>
-        </a>
-
-      </div>
-    </div>
+<body>
+  
+  <div class="mesh-container">
+    <div class="mesh-gradient"></div>
   </div>
+
+  <main class="main-container">
+    <header class="hero">
+      <h1 class="glitch-title" data-text="Portal do Afeto">Portal do Afeto</h1>
+      <p class="subtitle">Qual portal deseja abrir hoje?</p>
+    </header>
+
+    <div class="bento-grid">
+      <a href="Encontro/index.html" class="bento-item item-large">
+        <div class="item-content">
+          <span class="icon">🗺️</span>
+          <div class="text-group">
+            <h3>Primeiro Encontro</h3>
+            <p>Onde tudo começou...</p>
+          </div>
+        </div>
+        <div class="item-overlay violet"></div>
+      </a>
+
+      <a href="Coracoes/index.html" class="bento-item item-medium">
+        <div class="item-content">
+          <span class="icon">💖</span>
+          <div class="text-group">
+            <h3>Chuva de Corações</h3>
+            <p>Toque na tela e veja corações por todos os lados.</p>
+          </div>
+        </div>
+        <div class="item-overlay pink"></div>
+      </a>
+
+      <a href="Galeria-de-Elogios/index.html" class="bento-item item-small">
+        <div class="item-content">
+          <span class="icon">✨</span>
+          <div class="text-group">
+            <h3>Elogios</h3>
+            <p>Frases de carinho.</p>
+          </div>
+        </div>
+        <div class="item-overlay cyan"></div>
+      </a>
+
+      <a href="Mil-te-amos/index.html" class="bento-item item-small">
+        <div class="item-content">
+          <span class="icon">❤️</span>
+          <div class="text-group">
+            <h3>1000 Te Amos</h3>
+            <p>Amor em mil idiomas.</p>
+          </div>
+        </div>
+        <div class="item-overlay magenta"></div>
+      </a>
+    </div>
+
+    <footer class="footer">
+      <p>Desenvolvido com todo o amor do mundo</p>
+    </footer>
+  </main>
 
 </body>
 </html>

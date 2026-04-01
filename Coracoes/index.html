@@ -2,30 +2,40 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>💕 Corações 💕</title>
-  
-  <link rel="stylesheet" href="style.css?v=110">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✧ Chuva de Corações ✧</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=elite">
 </head>
 <body id="tela">
 
-  <button id="settings-toggle" class="settings-btn">☰</button>
+  <div class="mesh-container">
+    <div class="mesh-gradient"></div>
+  </div>
 
-  <div id="settings-panel" class="settings-panel">
-    <h2>Estilos de Coração</h2>
-    <div class="style-options">
-      <button class="style-btn active" data-heart="random">Aleatório (♡ e ♥︎)</button>
-      <button class="style-btn" data-heart="♡">Aberto ♡</button>
-      <button class="style-btn" data-heart="♥︎">Fechado ♥︎</button>
+  <nav class="top-nav">
+    <a href="../index.html" class="back-link">← Voltar</a>
+    <button id="settings-toggle" class="settings-btn">
+      <span>✦</span> Configurações
+    </button>
+  </nav>
+
+  <div id="mensagem-inicial" class="hero-msg">
+    <h1>Transforme o clique em Corações</h1>
+    <p>Toque na tela para fazer chover corações.</p>
+  </div>
+
+  <div id="settings-panel" class="settings-panel glass">
+    <h3>Design dos Corações</h3>
+    <div class="style-selector">
+       <button class="style-btn active" data-heart="random">Aleatório</button>
+       <button class="style-btn" data-heart="♡">Contorno (♡)</button>
+       <button class="style-btn" data-heart="♥︎">Preenchido (♥︎)</button>
     </div>
   </div>
 
-  <div class="wrap" id="mensagem-inicial">
-    <div class="card">
-      <h1>Clique e veja o que acontece</h1>
-    </div>
-  </div>
-
-  <script src="script.js?v=110"></script>
+  <script src="script.js?v=elite"></script>
 </body>
 </html>

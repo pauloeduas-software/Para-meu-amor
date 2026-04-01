@@ -1,6 +1,6 @@
 window.onload = function() {
 
-  const baseTranslations = [
+  const translations = [
     { language: "Português", phrase: "Eu te amo" },
     { language: "Inglês", phrase: "I love you" },
     { language: "Espanhol", phrase: "Te amo" },
@@ -11,7 +11,6 @@ window.onload = function() {
     { language: "Mandarim", phrase: "我爱你 (Wǒ ài nǐ)" },
     { language: "Russo", phrase: "Я тебя люблю (Ya tebya lyublyu)" },
     { language: "Árabe", phrase: "أحبك (Uhibbuki)" },
-    
     { language: "Coreano", phrase: "사랑해 (Saranghae)" },
     { language: "Hindi", phrase: "मैं तुमसे प्यार करता हूँ" },
     { language: "Holandês", phrase: "Ik hou van je" },
@@ -66,7 +65,7 @@ window.onload = function() {
     { language: "Croata", phrase: "Volim te" },
     { language: "Estoniano", phrase: "Ma armastan sind" },
     { language: "Frísio", phrase: "Ik hâld fan dy" },
-    { language: "Georgiano", phrase: "მიყვარხარ (Miqvarxar)" },
+    { language: "Georgiano", phrase: "მიყვარხαρ (Miqvarxar)" },
     { language: "Gujarati", phrase: "હું તને પ્રેમ કરું છું" },
     { language: "Crioulo Haitiano", phrase: "Mwen renmen ou" },
     { language: "Hausa", phrase: "Ina son ku" },
@@ -104,34 +103,46 @@ window.onload = function() {
     { language: "Ídiche", phrase: "איך האָב דיך ליב (Ikh hob dikh lib)" }
   ];
 
-  let translations = [];
-  for (let i = 0; i < 10; i++) {
-    translations = translations.concat(baseTranslations);
-  }
-
-  const backgroundClass = 'bg1'; 
-
   let currentIndex = 0;
-
-  const body = document.getElementById('page-body');
   const loveText = document.getElementById('love-text');
   const languageName = document.getElementById('language-name');
-  
-  loveText.textContent = translations[0].phrase;
-  languageName.textContent = translations[0].language;
-  
-  body.classList.add(backgroundClass);
+  const progressBar = document.getElementById('progressBar');
 
-  document.onclick = function() {
+  function updateDisplay() {
+    const item = translations[currentIndex];
     
-    currentIndex++;
-    if (currentIndex >= translations.length) {
-      currentIndex = 0; 
+    // Smooth fade out
+    loveText.style.opacity = '0';
+    loveText.style.transform = 'translateY(10px)';
+    
+    setTimeout(() => {
+      loveText.textContent = item.phrase;
+      languageName.textContent = item.language;
+      
+      // Fade in
+      loveText.style.opacity = '1';
+      loveText.style.transform = 'translateY(0)';
+      
+      // Update Progress
+      const progress = ((currentIndex + 1) / translations.length) * 100;
+      if (progressBar) progressBar.style.width = `${progress}%`;
+    }, 250);
+  }
+
+  // Initial
+  updateDisplay();
+
+  // Click on entire body to change
+  document.body.onclick = function() {
+    currentIndex = (currentIndex + 1) % translations.length;
+    updateDisplay();
+  };
+
+  // Keyboard support
+  document.onkeydown = function(e) {
+    if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
+      currentIndex = (currentIndex + 1) % translations.length;
+      updateDisplay();
     }
-    
-
-    loveText.textContent = translations[currentIndex].phrase;
-    languageName.textContent = translations[currentIndex].language;
-    
   };
 };
