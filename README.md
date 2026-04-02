@@ -9,16 +9,18 @@ Bem-vindo(a) ao código-fonte do nosso amor. Este é um projeto desenvolvido par
 O **Portal do Afeto** é um ambiente interativo, desenhado com estética cinematográfica, onde cada seção é um pouco do meu amor por você. A interface é fluida, amigável e cheia de pequenas surpresas preparadas com carinho.
 
 Aqui você vai encontrar:
-- **Primeiro Encontro**: Um lembrete de onde toda a nossa jornada começou.
-- **Chuva de Corações**: Uma interação onde cada toque na tela faz nascer mais amor.
+- **Primeiro Encontro**: Um lembrete de onde toda a nossa jornada começou, com o coração que se enche de memórias.
+- **Chuva de Corações**: Uma interação onde cada toque na tela faz nascer mais corações.
 - **Galeria de Elogios**: O espaço reservado para as palavras mais bonitas que tenho para você.
 - **Mil Te Amos**: Mais de mil formas de te dizer o quanto você é especial, traduzidas em diferentes idiomas celestiais.
+- **Pedido Especial**: O portal final reservado para a pergunta mais importante de todas.
 
 ## 🛠️ Tecnologias Envolvidas
 
 - `HTML5` (A estrutura do nosso relacionamento)
-- `Vanilla CSS / Animações` (As cores e o brilho dos nossos dias)
+- `Vanilla CSS / Animações` (As cores e o brilho dos nossos dias, com efeitos de Vidro e Mesh Gradients)
 - `JavaScript` (A lógica e a dinâmica que fazem o coração bater mais forte)
+- `SVG & ClipPath` (A técnica fluida que faz o coração encher com perfeição)
 - **100% Amor** (O framework principal utilizado em todo o processo)
 
 *Desenvolvido com todo o amor do mundo.*
