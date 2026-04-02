@@ -41,7 +41,7 @@ body {
     radial-gradient(circle at 30% 30%, rgba(0, 242, 255, 0.1) 0%, transparent 60%),
     radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 60%);
   filter: blur(10vmin);
-  animation: drift 20s infinite alternate ease-in-out;
+  animation: bgFlow 30s linear infinite;
 }
 
 @keyframes bgFlow {

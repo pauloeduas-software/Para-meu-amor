@@ -2,8 +2,8 @@
   --bg-black: #020202;
   --glass: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --accent-primary: #00f2ff;
-  --neon-red: #ff1e56;
+  --accent-primary: #f97316;
+  --neon-red: #ef4444;
   --text-main: #ffffff;
   --text-dim: rgba(255, 255, 255, 0.5);
   --font-main: 'Outfit', sans-serif;
@@ -39,8 +39,8 @@ body {
   position: absolute;
   inset: -50%;
   background: 
-    radial-gradient(circle at 60% 40%, rgba(255, 30, 86, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 40% 60%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+    radial-gradient(circle at 60% 40%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 40% 60%, rgba(239, 68, 68, 0.15) 0%, transparent 40%);
   filter: blur(10vmin);
   animation: bgFlow 30s linear infinite;
 }
@@ -148,27 +148,27 @@ body {
   overflow: visible;
 }
 
-#heart-fill {
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+#heart-liquid {
+  transition: y 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* --- Typography Layer --- */
 .message-layer {
   position: relative;
-  z-index: 10; /* Above the heart */
+  z-index: 10;
   width: 90%;
   max-width: min(800px, 90vw);
   text-align: center;
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .typography-reveal {
   padding: 3rem 2rem;
   border-radius: 2rem;
-  background: rgba(2, 2, 2, 0.5); /* Slight dark backdrop for legibility */
+  background: rgba(2, 2, 2, 0.5);
   backdrop-filter: blur(0.625rem);
   border: 1px solid var(--glass-border);
   box-shadow: 0 1.25rem 2.5rem rgba(0,0,0,0.5);
-  animation: loadFadeIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 #journey-text {

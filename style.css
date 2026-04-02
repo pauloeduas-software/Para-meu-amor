@@ -56,16 +56,14 @@ body {
   left: -50%;
   background: 
     radial-gradient(circle at 70% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
   filter: blur(10vmin);
-  animation: meshFlow 20s linear infinite;
+  animation: bgFlow 30s linear infinite;
 }
 
-@keyframes meshFlow {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.2); }
-  100% { transform: rotate(360deg) scale(1); }
+@keyframes bgFlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* --- Main Layout --- */

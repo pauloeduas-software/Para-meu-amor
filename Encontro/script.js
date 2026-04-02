@@ -8,6 +8,7 @@ window.onload = function() {
   ];
 
   let step = 0;
+  let isAnimating = false;
   
   const dom = {
     body: document.body,
@@ -17,12 +18,10 @@ window.onload = function() {
     journeyText: document.getElementById('journey-text'),
     journeySubtext: document.getElementById('journey-subtext'),
     clickPrompt: document.getElementById('click-prompt'),
-    fillOffset: document.getElementById('fill-offset'),
-    emptyOffset: document.getElementById('empty-offset')
+    heartLiquid: document.getElementById('heart-liquid')
   };
 
   function updateVisuals() {
-    // Step 0: Intro only
     if (step === 0) {
       dom.introLayer.classList.remove('hidden');
       dom.heartContainer.classList.add('hidden');
@@ -31,20 +30,17 @@ window.onload = function() {
       return;
     }
 
-    // Hide intro from step 1 onward
     dom.introLayer.classList.add('hidden');
     dom.clickPrompt.classList.remove('hidden');
     dom.heartContainer.classList.remove('hidden');
 
-    // Step 1: Just the empty heart
     if (step === 1) {
       updateHeartFill(0);
       hideMessage();
       return;
     }
 
-    // Beyond step 1: Toggle message and heart fill
-    const maxSteps = (messages.length * 2) + 1; // 11 steps for 5 messages
+    const maxSteps = (messages.length * 2) + 1;
 
     if (step >= maxSteps) {
       hideMessage();
@@ -56,54 +52,82 @@ window.onload = function() {
     const messageIndex = Math.floor((step - 2) / 2);
 
     if (isMessageStep) {
-      // Show Message & Increase Blood
-      const percentage = ((messageIndex + 1) / messages.length) * 100;
-      updateHeartFill(percentage);
-      showMessage(messages[messageIndex]);
+      // INÍCIO DO CICLO:
+      isAnimating = true; // Trava cliques
       
-      if (messageIndex === messages.length - 1) {
-        dom.heartContainer.classList.add('full');
-      }
+      const percentage = ((messageIndex + 1) / messages.length) * 100;
+      
+      // 1. O coração começa a encher primeiro
+      updateHeartFill(percentage);
+      
+      // 2. Esperamos o coração terminar de encher (1.5s do CSS) para mostrar a mensagem
+      setTimeout(() => {
+        showMessage(messages[messageIndex]);
+        
+        if (messageIndex === messages.length - 1) {
+          dom.heartContainer.classList.add('full');
+        }
+      }, 1500); 
+
     } else {
-      // Hide Message (just admire previous heart state)
       hideMessage();
     }
   }
 
   function updateHeartFill(percentage) {
-    if (dom.fillOffset) dom.fillOffset.setAttribute('offset', `${percentage}%`);
-    if (dom.emptyOffset) dom.emptyOffset.setAttribute('offset', `${percentage}%`);
+    if (dom.heartLiquid) {
+      const newY = 95 - (percentage * 1.05); 
+      dom.heartLiquid.setAttribute('y', newY);
+    }
   }
 
   function hideMessage() {
-    dom.messageContainer.classList.add('hidden');
+    dom.messageContainer.style.opacity = '0';
+    dom.messageContainer.style.transform = 'translateY(10px)';
+    setTimeout(() => {
+      dom.messageContainer.classList.add('hidden');
+    }, 400);
   }
 
   function showMessage(msg) {
-    dom.messageContainer.classList.remove('hidden');
-    dom.journeyText.style.opacity = '0';
-    dom.journeyText.style.transform = 'translateY(15px)';
-    dom.journeySubtext.classList.remove('show-sub');
-    dom.journeySubtext.style.display = 'none';
-
+    // Aqui isAnimating já é true, então não precisamos checar de novo
+    
+    // Primeiro limpamos o texto atual
+    dom.messageContainer.style.opacity = '0';
+    dom.messageContainer.style.transform = 'translateY(10px)';
+    
     setTimeout(() => {
-      dom.journeyText.textContent = msg.title;
-      
-      if (msg.sub) {
-        dom.journeySubtext.textContent = msg.sub;
-        dom.journeySubtext.style.display = 'block';
-        void dom.journeySubtext.offsetWidth; 
-        dom.journeySubtext.classList.add('show-sub');
-      }
+      dom.journeyText.textContent = '';
+      dom.journeySubtext.textContent = '';
+      dom.journeySubtext.style.display = 'none';
+      dom.journeySubtext.classList.remove('show-sub');
 
-      dom.journeyText.style.opacity = '1';
-      dom.journeyText.style.transform = 'translateY(0)';
+      // Colocamos o novo conteúdo
+      dom.journeyText.textContent = msg.title;
+      dom.messageContainer.classList.remove('hidden');
+      
+      requestAnimationFrame(() => {
+        dom.messageContainer.style.opacity = '1';
+        dom.messageContainer.style.transform = 'translateY(0)';
+        
+        if (msg.sub) {
+          dom.journeySubtext.textContent = msg.sub;
+          dom.journeySubtext.style.display = 'block';
+          setTimeout(() => {
+            dom.journeySubtext.classList.add('show-sub');
+          }, 300);
+        }
+        
+        // Destrava a interação apenas após a mensagem subir completamente
+        setTimeout(() => {
+           isAnimating = false;
+        }, 600);
+      });
     }, 300);
   }
 
-  // Click interaction goes forward
   dom.body.onclick = function(e) {
-    if (e.target.closest('.back-link')) return;
+    if (e.target.closest('.back-link') || isAnimating) return;
     const maxSteps = (messages.length * 2) + 1;
     if (step < maxSteps) {
       step++;
@@ -111,8 +135,8 @@ window.onload = function() {
     }
   };
 
-  // Keyboard navigation
   document.onkeydown = function(e) {
+    if (isAnimating) return;
     if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
       const maxSteps = (messages.length * 2) + 1;
       if (step < maxSteps) {
@@ -122,7 +146,6 @@ window.onload = function() {
     }
   };
 
-  // Run initialization
   updateVisuals();
   updateHeartFill(0);
 };

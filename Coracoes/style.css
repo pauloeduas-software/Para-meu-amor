@@ -5,9 +5,9 @@
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.6);
   
-  --accent-violet: #a855f7;
-  --accent-pink: #ec4899;
-  --accent-cyan: #06b6d4;
+  --accent-violet: #db2777;
+  --accent-pink: #f472b6;
+  --accent-cyan: #ec4899;
   
   --font-main: 'Outfit', sans-serif;
 }
@@ -53,17 +53,24 @@ body {
   top: -50%;
   left: -50%;
   background: 
-    radial-gradient(circle at 70% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 70% 20%, rgba(219, 39, 119, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(244, 114, 182, 0.1) 0%, transparent 40%);
   filter: blur(10vmin);
-  animation: meshFlow 30s linear infinite;
+  animation: bgFlow 30s linear infinite;
 }
 
-@keyframes meshFlow {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.1); }
-  100% { transform: rotate(360deg) scale(1); }
+@keyframes bgFlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.stars-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(white, rgba(255, 255, 255, 0.2) 1px, transparent 40px);
+  background-size: 8vmin 8vmin;
+  opacity: 0.1;
+  z-index: -1;
 }
 
 /* --- Navigation --- */
