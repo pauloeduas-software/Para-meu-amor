@@ -1,112 +1,29 @@
+/* ================================================================
+   Encontro/style.css — Identidade Visual: Primeiro Encontro 🗺️
+   Importa shared.css pela tag HTML. Aqui ficam apenas os estilos
+   únicos desta página (SVG do coração, camadas de texto, etc.).
+   ================================================================ */
+
+/* --- Identidade de cor desta página --- */
 :root {
-  --bg-black: #020202;
-  --glass: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --accent-primary: #f97316;
-  --neon-red: #ef4444;
-  --text-main: #ffffff;
-  --text-dim: rgba(255, 255, 255, 0.5);
-  --font-main: 'Outfit', sans-serif;
+  --page-accent:    #f97316;  /* laranja vibrante — o calor do encontro */
+  --accent-primary: #f97316;  /* laranja quente para o gradiente do texto */
+  --neon-red:       #ef4444;  /* vermelho vivo para acentos */
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-img, video, iframe, svg {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
+/* Cursor de mãozinha — toda a tela é clicável para avançar */
 body {
-  background-color: var(--bg-black);
-  color: var(--text-main);
-  font-family: var(--font-main);
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
   cursor: pointer;
 }
 
-/* --- Atmospheric Background --- */
-.mesh-container {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-}
-
-.mesh-gradient {
-  position: absolute;
-  inset: -50%;
-  background: 
-    radial-gradient(circle at 60% 40%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 40% 60%, rgba(239, 68, 68, 0.15) 0%, transparent 40%);
-  filter: blur(10vmin);
-  animation: bgFlow 30s linear infinite;
-}
-
-@keyframes bgFlow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.stars-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(white, rgba(255,255,255,0.2) 1px, transparent 40px);
-  background-size: 8vmin 8vmin;
-  opacity: 0.1;
-  z-index: -1;
-}
-
-/* --- Navigation --- */
-.top-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: max(3.75rem, 8vh);
-  padding: 0 clamp(1rem, 5vw, 4rem);
-  display: flex;
-  align-items: center;
-  z-index: 100;
-}
-
-.glass {
-  background: var(--glass);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.back-link {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: clamp(0.75rem, 2vw, 0.8rem);
-  transition: all 0.3s;
-  display: inline-flex;
-  min-height: 2.75rem;
-  min-width: 2.75rem;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem; /* Better touch target */
-}
-
-.back-link:hover {
-  color: var(--text-main);
-  transform: translateX(-5px);
-}
-
-/* --- Main Layout --- */
+/* --- Layout Principal da Jornada --- */
 .viewport {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: max(3.75rem, 8vh); /* Offset nav */
+  /* Desloca o conteúdo para baixo da navegação fixa */
+  padding-top: max(3.75rem, 8vh);
 }
 
 .interaction-zone {
@@ -118,7 +35,7 @@ body {
   justify-content: center;
 }
 
-/* --- Heart SVG Background --- */
+/* --- Coração SVG ao Fundo (Indicador de Progresso Visual) --- */
 .heart-container {
   position: absolute;
   width: clamp(15rem, 55vmin, 40.625rem);
@@ -126,20 +43,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1; /* Behind text */
-  opacity: 0.3; /* Base opacity so it acts as background */
+  z-index: 1;            /* fica atrás da camada de texto */
+  opacity: 0.3;          /* opacidade base — funciona como fundo sutil */
   transition: opacity 1s ease-in-out, filter 1s ease-in-out;
   pointer-events: none;
 }
 
+/* Quando o coração está completamente cheio — pulsa com brilho */
 .heart-container.full {
   opacity: 0.8;
   animation: heartPulse 1.5s infinite ease-in-out;
 }
 
 @keyframes heartPulse {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2.5rem rgba(255, 30, 86, 0.4)); }
-  50% { transform: scale(1.05); filter: drop-shadow(0 0 5rem rgba(255, 30, 86, 0.8)); }
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2.5rem rgba(255, 30, 86, 0.4));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 5rem rgba(255, 30, 86, 0.8));
+  }
 }
 
 #heart-svg {
@@ -148,11 +72,12 @@ body {
   overflow: visible;
 }
 
+/* Transição suave do preenchimento líquido do coração */
 #heart-liquid {
   transition: y 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- Typography Layer --- */
+/* --- Camada de Mensagem Central --- */
 .message-layer {
   position: relative;
   z-index: 10;
@@ -162,15 +87,17 @@ body {
   transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+/* Container de texto com blur de vidro */
 .typography-reveal {
   padding: 3rem 2rem;
   border-radius: 2rem;
   background: rgba(2, 2, 2, 0.5);
   backdrop-filter: blur(0.625rem);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 1.25rem 2.5rem rgba(0,0,0,0.5);
+  box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.5);
 }
 
+/* Texto principal da mensagem de jornada */
 #journey-text {
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 800;
@@ -184,6 +111,7 @@ body {
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+/* Subtexto complementar da mensagem */
 #journey-subtext {
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   color: var(--text-dim);
@@ -191,10 +119,10 @@ body {
   line-height: 1.6;
   opacity: 0;
   transform: translateY(1vh);
-  animation: var(--load-anim, none); 
+  animation: var(--load-anim, none);
 }
 
-/* Class to trigger subtext animation */
+/* Classe ativada via JS para animar a entrada do subtexto */
 .show-sub {
   --load-anim: loadFadeIn 0.8s forwards 0.2s;
 }
@@ -206,7 +134,9 @@ body {
   }
 }
 
-/* --- UI Transitions & New Elements --- */
+/* --- Elementos de UI e Transições --- */
+
+/* Classe utilitária para ocultar elementos suavemente */
 .hidden {
   opacity: 0 !important;
   pointer-events: none;
@@ -214,6 +144,7 @@ body {
   transition: opacity 0.5s ease;
 }
 
+/* Camada introdutória — visível apenas no carregamento */
 .intro-layer {
   position: absolute;
   z-index: 20;
@@ -223,6 +154,7 @@ body {
   transition: opacity 0.8s ease;
 }
 
+/* Texto de introdução com gradiente e entrada animada */
 .intro-text {
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 800;
@@ -235,6 +167,7 @@ body {
   animation: loadFadeIn 1.2s forwards;
 }
 
+/* Container do aviso de próximo toque */
 .prompt-container {
   position: absolute;
   bottom: 5vh;
@@ -245,6 +178,7 @@ body {
   pointer-events: none;
 }
 
+/* Indicador pulsante de "toque para avançar" */
 #click-prompt {
   font-size: 0.9rem;
   letter-spacing: 0.15em;
@@ -256,11 +190,11 @@ body {
 
 @keyframes pulseOpacity {
   0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
+  50%       { opacity: 0.8; }
 }
 
-/* --- Responsive --- */
-@media (max-width: 48em) { /* ~768px */
+/* --- Responsividade --- */
+@media (max-width: 48em) {
   .top-nav { padding: 0 1rem; }
   .heart-container { width: min(85vw, 65vh); }
   .typography-reveal { padding: clamp(1rem, 3vh, 2rem) 1.5rem; }

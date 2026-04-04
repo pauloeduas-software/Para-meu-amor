@@ -1,0 +1,121 @@
+/* ================================================================
+   Galeria-de-Elogios/style.css — Identidade Visual: Galeria ✨
+   Importa shared.css pela tag HTML. Aqui ficam apenas os estilos
+   únicos desta página.
+   ================================================================ */
+
+/* --- Identidade de cor desta página --- */
+:root {
+  --page-accent:      #06b6d4;  /* ciano — frescor e elegância */
+  --accent-primary:   #06b6d4;
+  --accent-secondary: #a855f7;
+}
+
+/* --- Conteúdo Principal --- */
+.content-viewport {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 5vw, 4rem);
+}
+
+.compliment-stage {
+  width: 100%;
+  max-width: min(900px, 90vw);
+  position: relative;
+}
+
+.typography-reveal {
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(2vh);
+  animation: loadFadeIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes loadFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  width: 100%;
+  max-width: 90vw;
+  margin: 0 auto 1.5rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #fff 0%, var(--accent-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0.625rem 1.25rem color-mix(in srgb, var(--page-accent) 25%, transparent));
+  letter-spacing: -0.02em;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.decor-line {
+  width: min(3.75rem, 15vw);
+  height: 0.2rem;
+  background: var(--accent-primary);
+  margin: 0 auto 1.5rem;
+  border-radius: 2px;
+  box-shadow: 0 0 0.625rem var(--accent-primary);
+}
+
+/* Instrução de toque para avançar os elogios */
+#click-prompt {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  animation: pulseDim 2s infinite ease-in-out;
+}
+
+@keyframes pulseDim {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.8; }
+}
+
+/* --- Barra de Progresso Inferior --- */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: max(3.125rem, 6vh);
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(1rem, 5vw, 4rem);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  z-index: 100;
+  border-top: 1px solid var(--glass-border);
+}
+
+.progress-container {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, var(--accent-secondary), var(--accent-primary));
+  box-shadow: 0 0 0.625rem var(--accent-primary);
+  transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 48em) {
+  .top-nav, .bottom-bar { padding: 0 1rem; }
+  .top-nav, .bottom-bar { padding: 0 1rem; }
+  #click-prompt { font-size: 0.8rem; }
+}

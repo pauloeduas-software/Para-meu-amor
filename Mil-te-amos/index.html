@@ -7,14 +7,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=ultra">
+  <!-- Base visual compartilhada: reset, gradiente, estrelas, navegação, corações -->
+  <link rel="stylesheet" href="../style.css">
+  <!-- Estilos únicos desta página -->
+  <link rel="stylesheet" href="te-amos.css">
 </head>
 <body id="page-body">
-
-  <div class="mesh-container">
-    <div class="mesh-gradient"></div>
-    <div class="stars-overlay"></div>
-  </div>
 
   <nav class="top-nav glass">
     <a href="../index.html" class="back-link">
@@ -27,6 +25,7 @@
       <div class="typography-reveal">
         <h1 id="love-text">Eu te amo</h1>
         <div class="divider"></div>
+        <p id="pronunciation-text"></p>
         <p id="language-name">Português</p>
         <p id="click-prompt">Dê um toque na tela</p>
       </div>
@@ -39,6 +38,9 @@
     </div>
   </footer>
 
-  <script src="script.js?v=ultra"></script>
+  <!-- Script global de interação -->
+  <script src="../script.js"></script>
+  <!-- Script local -->
+  <script src="te-amos.js"></script>
 </body>
 </html>

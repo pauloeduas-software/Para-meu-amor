@@ -1,0 +1,132 @@
+/* ================================================================
+   Coracoes/style.css — Identidade Visual: Chuva de Corações 💖
+   Importa shared.css pela tag HTML. Aqui ficam apenas os estilos
+   únicos desta página (nav flutuante, painel, seletores, etc.).
+   ================================================================ */
+
+/* --- Identidade de cor desta página --- */
+:root {
+  --page-accent:     #ec4899;  /* rosa vibrante — a cor do amor */
+  --accent-pink:     #f472b6;
+  --text-secondary:  rgba(255, 255, 255, 0.6);
+}
+
+/* Overflow visível — necessário para os corações voarem pela tela */
+body {
+  overflow: hidden;
+  min-height: 100vh;
+  touch-action: manipulation;
+}
+
+/* --- Navegação Flutuante (diferente das outras páginas) --- */
+/* Esta nav é posicionada com offset, não encostada no topo */
+.top-nav {
+  top: clamp(1rem, 3vh, 2rem);
+  left: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  background: transparent;     /* sem fundo — sobrescreve o .glass da base */
+  border-bottom: none;
+}
+
+/* Link de voltar com estilo "pill" característico desta página */
+.back-link {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  border: 1px solid var(--glass-border);
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
+  font-weight: 500;
+  padding: 0.8rem 1.2rem;
+}
+
+.back-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Mensagem Central (Tela de Início) --- */
+.hero-msg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;   /* não captura cliques */
+  z-index: 1;
+}
+
+.hero-msg h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, var(--accent-pink) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.hero-msg p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* --- Painel de Configurações Deslizante --- */
+.settings-panel {
+  position: fixed;
+  top: clamp(5rem, 12vh, 6rem);
+  right: clamp(1rem, 3vw, 2rem);
+  width: min(17.5rem, 90vw);
+  padding: clamp(1.5rem, 4vw, 2rem);
+  border-radius: 2rem;
+  /* Começa oculto fora da tela (à direita) */
+  transform: translateX(calc(100% + 3rem));
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(1.25rem);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 1.5rem 3.125rem -0.75rem rgba(0, 0, 0, 0.5);
+}
+
+/* Painel aberto — desliza para dentro da tela */
+.settings-panel.open {
+  transform: translateX(0);
+}
+
+.settings-panel h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* --- Seletor de Estilo de Coração --- */
+.style-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Botões de opção dentro do painel */
+.style-btn {
+  padding: 0.8rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  border-radius: 1rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+/* Estado ativo do botão selecionado */
+.style-btn.active {
+  background: color-mix(in srgb, var(--page-accent) 12%, transparent);
+  border-color: var(--accent-pink);
+  color: #fff;
+}
+
+.style-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}

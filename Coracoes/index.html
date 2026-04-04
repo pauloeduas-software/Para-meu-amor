@@ -7,20 +7,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=elite">
+  <!-- Base visual compartilhada: reset, gradiente, estrelas, navegação, corações -->
+  <link rel="stylesheet" href="../style.css">
+  <!-- Estilos únicos desta página -->
+  <link rel="stylesheet" href="coracoes.css">
 </head>
 <body id="tela">
 
-  <div class="mesh-container">
-    <div class="mesh-gradient"></div>
-    <div class="stars-overlay"></div>
-  </div>
-
   <nav class="top-nav">
     <a href="../index.html" class="back-link">← Voltar</a>
-    <button id="settings-toggle" class="settings-btn">
-      <span>✦</span> Configurações
-    </button>
+    <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+      <button id="rain-btn" class="settings-btn">
+        <span>🌧️</span> Iniciar Chuva de Amor
+      </button>
+      <button id="settings-toggle" class="settings-btn">
+        <span>❆</span> Configurações
+      </button>
+    </div>
   </nav>
 
   <div id="mensagem-inicial" class="hero-msg">
@@ -37,6 +40,9 @@
     </div>
   </div>
 
-  <script src="script.js?v=elite"></script>
+  <!-- Script global de interação -->
+  <script src="../script.js"></script>
+  <!-- Script local: painel de estilos e Chuva de Amor -->
+  <script src="coracoes.js"></script>
 </body>
 </html>

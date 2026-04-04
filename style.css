@@ -1,19 +1,31 @@
+/* ================================================================
+   style.css — Base Visual Global & Home · Portal do Afeto 💖
+   Importado por todas as páginas do projeto.
+   Contém: reset, variáveis globais, fundo animado, navegação,
+   coração de clique e o layout da página inicial (Bento Grid).
+   ================================================================ */
+
+/* --- Variáveis Base --- */
 :root {
-  --bg-black: #030303;
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.6);
+  --bg-black:      #020202;
+  --glass:         rgba(255, 255, 255, 0.05);
+  --glass-border:  rgba(255, 255, 255, 0.1);
+  --text-main:     #ffffff;
+  --text-dim:      rgba(255, 255, 255, 0.5);
+  --font-main:     'Outfit', sans-serif;
+
+  /* Cor de destaque padrão — sobrescrita em cada página via :root local */
+  --page-accent:   #a855f7;
   
+  /* Cores específicas da home */
   --accent-violet: #a855f7;
-  --accent-pink: #ec4899;
-  --accent-cyan: #06b6d4;
-  --accent-magenta: #d946ef;
-  
-  --font-main: 'Outfit', sans-serif;
+  --accent-pink:   #ec4899;
+  --accent-cyan:   #06b6d4;
+  --accent-magenta:#d946ef;
 }
 
-* {
+/* --- Reset Universal --- */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -26,60 +38,186 @@ img, video, iframe, svg {
   display: block;
 }
 
+/* --- Base do Body Global --- */
 body {
   background-color: var(--bg-black);
-  color: var(--text-primary);
+  color: var(--text-main);
   font-family: var(--font-main);
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Classe exclusiva para centrar o conteúdo na página Home (index.html) */
+.home-body {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: safe center;
+  padding: 2rem 0;
 }
 
-/* --- Animated Mesh Background --- */
-.mesh-container {
+/* ================================================================
+   Fundo Atmosférico — Mesh Gradient + Estrelas
+   O gradiente é definido com --page-accent para ser único em
+   cada página.
+   ================================================================ */
+body::before {
+  content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.mesh-gradient {
-  position: absolute;
+  inset: 0;
   width: 200vw;
   height: 200vh;
   top: -50%;
   left: -50%;
-  background: 
-    radial-gradient(circle at 70% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+  z-index: -2;
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--page-accent) 20%, transparent) 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--page-accent) 12%, transparent) 0%, transparent 60%);
   filter: blur(10vmin);
   animation: bgFlow 30s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes bgFlow {
-  0% { transform: rotate(0deg); }
+  0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-/* --- Main Layout --- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(white, rgba(255, 255, 255, 0.2) 1px, transparent 40px);
+  background-size: 8vmin 8vmin;
+  opacity: 0.1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ================================================================
+   Navegação Superior — Fixada no topo com Glassmorphism
+   ================================================================ */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: max(3.75rem, 8vh);
+  padding: 0 clamp(1rem, 5vw, 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  z-index: 100;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(1.25rem);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.back-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+}
+
+.back-link:hover {
+  color: var(--text-main);
+  transform: translateX(-4px);
+}
+
+.settings-btn {
+  background: var(--glass);
+  backdrop-filter: blur(1.25rem);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  padding: 0.6rem 1rem;
+  min-height: 2.75rem;
+  border-radius: 0.75rem;
+  font-family: inherit;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.settings-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--page-accent);
+  box-shadow: 0 0 0.75rem color-mix(in srgb, var(--page-accent) 40%, transparent);
+}
+
+/* ================================================================
+   Corações Gerados & Chuva de Amor 💖
+   ================================================================ */
+.coracao {
+  position: fixed;
+  font-size: 2rem;
+  color: var(--page-accent);
+  pointer-events: none;
+  z-index: 9999;
+  text-shadow:
+    0 0 0.625rem color-mix(in srgb, var(--page-accent) 60%, transparent),
+    0 0 1.25rem  color-mix(in srgb, var(--page-accent) 35%, transparent);
+  animation: floatUp 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: transform, opacity;
+  user-select: none;
+  transform: translate(-50%, -50%); /* Centraliza o coração no clique */
+}
+
+@keyframes floatUp {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
+  18% { transform: translate(-50%, -50%) scale(1.3) rotate(12deg); opacity: 1; }
+  100% { transform: translate(-50%, calc(-50% - 22vh)) scale(0.7) rotate(-8deg); opacity: 0; }
+}
+
+.coracao-chuva {
+  animation: chuvaUp var(--duracao, 4s) ease-in forwards;
+  font-size: var(--tamanho, 2rem);
+  top: auto;
+  bottom: -2rem;
+}
+
+@keyframes chuvaUp {
+  0% { transform: translateX(-50%) translateY(0) scale(var(--escala, 1)) rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: 0.7; }
+  100% { transform: translateX(-50%) translateY(-110vh) scale(var(--escala, 1)) rotate(20deg); opacity: 0; }
+}
+
+/* ================================================================
+   Estilos Específicos da Página Inicial (Bento Grid)
+   ================================================================ */
 .main-container {
+  position: relative;
   width: 100%;
   max-width: clamp(18.75rem, 90vw, 75rem);
   padding: clamp(1rem, 5vw, 3rem);
   display: flex;
   flex-direction: column;
   gap: clamp(1.5rem, 5vw, 3rem);
-  z-index: 1;
+  z-index: 10;
 }
 
-.hero {
-  text-align: center;
-}
+.hero { text-align: center; }
 
 .glitch-title {
   font-size: clamp(2.5rem, 8vw, 4.5rem);
@@ -94,13 +232,12 @@ body {
 }
 
 .subtitle {
-  color: var(--text-secondary);
+  color: var(--text-dim);
   font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   max-width: min(37.5rem, 90vw);
   margin: 0 auto;
 }
 
-/* --- Bento Grid --- */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -148,9 +285,7 @@ body {
   transition: transform 0.5s ease;
 }
 
-.bento-item:hover .icon {
-  transform: scale(1.2) rotate(-5deg);
-}
+.bento-item:hover .icon { transform: scale(1.2) rotate(-5deg); }
 
 .text-group h3 {
   font-size: 1.5rem;
@@ -161,17 +296,13 @@ body {
 
 .text-group p {
   font-size: 0.95rem;
-  color: var(--text-secondary);
+  color: var(--text-dim);
   line-height: 1.4;
 }
 
-/* --- Overlays & Accents --- */
 .item-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   opacity: 0;
   transition: opacity 0.5s ease;
   z-index: 1;
@@ -182,51 +313,28 @@ body {
 .cyan { background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.2), transparent); }
 .magenta { background: radial-gradient(circle at top right, rgba(217, 70, 239, 0.2), transparent); }
 
-.bento-item:hover .item-overlay {
-  opacity: 1;
-}
+.bento-item:hover .item-overlay { opacity: 1; }
 
-.footer {
-  text-align: center;
-  margin-top: 1rem;
-}
+.footer { text-align: center; margin-top: 1rem; }
+.footer p { color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
-.footer p {
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-/* --- Responsive --- */
-/* --- Responsive --- */
-/* --- Responsive --- */
-@media (max-width: 64em) { /* ~1024px */
+/* --- Responsividade da Home --- */
+@media (max-width: 64em) {
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .item-large, .item-medium, .item-small {
-    grid-column: span 2;
-    min-height: 22vh;
-  }
+  .item-large, .item-medium, .item-small { min-height: 22vh; }
 }
 
-@media (max-width: 48em) { /* ~768px */
+@media (max-width: 48em) {
   .main-container { padding: 1.5rem; }
   .glitch-title { font-size: clamp(2rem, 10vw, 3rem); }
-  .bento-item { 
-    border-radius: 1.5rem; 
-    padding: 1.5rem; 
-    min-height: 20vh;
-  }
+  .bento-item { border-radius: 1.5rem; padding: 1.5rem; min-height: 20vh; }
 }
 
-@media (max-width: 30em) { /* ~480px */
+@media (max-width: 30em) {
   .bento-grid {
     grid-template-columns: 1fr;
   }
-  .item-large, .item-medium, .item-small {
-    grid-column: span 1;
-    min-height: 25vh;
-  }
-}
+  .item-large, .item-medium, .item-small { grid-column: span 1 !important; grid-row: span 1 !important; min-height: 25vh; }
+}

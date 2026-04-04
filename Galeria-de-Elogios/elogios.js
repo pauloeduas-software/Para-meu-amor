@@ -1,4 +1,4 @@
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function() {
 
   const compliments = [
     "Você é fofa.",
@@ -41,18 +41,18 @@ window.onload = function() {
   function updateDisplay() {
     const text = compliments[currentIndex];
     
-    // Smooth fade/slide out
+    // Desvanecimento/deslizamento suave para fora
     complimentText.style.opacity = '0';
     complimentText.style.transform = 'translateY(15px)';
     
     setTimeout(() => {
       complimentText.textContent = text;
       
-      // Reveal
+      // Revela o novo texto
       complimentText.style.opacity = '1';
       complimentText.style.transform = 'translateY(0)';
       
-      // Progress
+      // Progresso da barra
       updateProgress();
     }, 300);
   }
@@ -62,23 +62,22 @@ window.onload = function() {
       if (progressBar) progressBar.style.width = `${progress}%`;
   }
 
-  // Initial setup ONLY for progress (text is already in HTML)
+  // Configuração inicial (apenas o progresso, pois o texto já está no HTML)
   updateProgress();
 
-  // Interaction
-  document.body.onclick = function(e) {
-    // Ignore if clicked on back button
+  /* Clique em qualquer lugar para avançar — ignora o link "Voltar" */
+  document.addEventListener('click', function (e) {
     if (e.target.closest('.back-link')) return;
-    
     currentIndex = (currentIndex + 1) % compliments.length;
     updateDisplay();
-  };
+  });
 
-  // Keyboard
-  document.onkeydown = function(e) {
+  /* Suporte a teclado (Espaço, Seta Direita, Enter) */
+  document.addEventListener('keydown', function (e) {
     if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
       currentIndex = (currentIndex + 1) % compliments.length;
       updateDisplay();
     }
-  };
-};
+  });
+
+});

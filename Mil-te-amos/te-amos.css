@@ -1,0 +1,154 @@
+/* ================================================================
+   Mil-te-amos/style.css — Identidade Visual: Mil Formas de Amor ❤️
+   Importa shared.css pela tag HTML. Aqui ficam apenas os estilos
+   únicos desta página.
+   ================================================================ */
+
+/* --- Identidade de cor desta página --- */
+:root {
+  --page-accent:      #d946ef;  /* magenta vibrante — amor em mil idiomas */
+  --accent-primary:   #d946ef;
+  --accent-secondary: #a855f7;
+}
+
+/* --- Viewport Cinematográfica --- */
+.content-viewport {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 5vw, 4rem);
+}
+
+.love-stage {
+  width: 100%;
+  max-width: min(900px, 90vw);
+}
+
+.typography-reveal {
+  text-align: center;
+  width: 100%;
+}
+
+/* Título principal — a frase de amor em destaque */
+h1 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  width: 100%;
+  max-width: 90vw;
+  margin: 0 auto 2rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #fff 0%, var(--accent-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0.625rem 1.875rem color-mix(in srgb, var(--page-accent) 25%, transparent));
+  letter-spacing: -0.04em;
+  animation: revealText 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animação de entrada do título */
+@keyframes revealText {
+  0% {
+    transform: translateY(5vh);
+    opacity: 0;
+    filter: blur(2vh);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Linha divisória decorativa */
+.divider {
+  width: min(5rem, 15vw);
+  height: 0.25rem;
+  background: var(--accent-primary);
+  margin: 0 auto 1.5rem;
+  border-radius: 2px;
+  box-shadow: 0 0 0.9375rem var(--accent-primary);
+}
+
+/* Pronúncia principal (o guia para falar) */
+#pronunciation-text {
+  font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+  font-weight: 400;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  font-style: italic;
+}
+
+/* Nome do idioma exibido abaixo da frase */
+#language-name {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  font-weight: 300;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.6em;
+  /* Recua levemente para compensar o espaçamento extra da direita */
+  margin-left: 0.6em;
+  margin-bottom: 1.5rem;
+}
+
+/* Instrução de toque pulsando suavemente */
+#click-prompt {
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  margin-top: 3rem;
+  animation: pulseOpacity 2.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseOpacity {
+  0%, 100% { opacity: 0.2; }
+  50%       { opacity: 0.8; }
+}
+
+/* --- Barra de Progresso Inferior --- */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: max(3.125rem, 6vh);
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(1rem, 5vw, 4rem);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  z-index: 100;
+  border-top: 1px solid var(--glass-border);
+}
+
+.progress-container {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, var(--accent-secondary), var(--accent-primary));
+  box-shadow: 0 0 0.625rem var(--accent-primary);
+  transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 48em) {
+  .top-nav, .bottom-bar { padding: 0 1rem; }
+  .top-nav, .bottom-bar { padding: 0 1rem; }
+  #language-name { font-size: 1rem; letter-spacing: 0.4em; }
+}
