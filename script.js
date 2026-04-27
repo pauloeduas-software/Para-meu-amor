@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* Captura o clique em qualquer lugar da janela */
-  window.addEventListener('click', function (e) {
-    /* Não bloqueia a função de botões e links */
+  /* Captura clique no PC e toque no Mobile sem duplicação usando Pointer Events */
+  window.addEventListener('pointerdown', function(e) {
+    /* Gera o coração na posição exata do ponteiro (mouse ou dedo) */
     spawnHeart(e.clientX, e.clientY);
   });
 
